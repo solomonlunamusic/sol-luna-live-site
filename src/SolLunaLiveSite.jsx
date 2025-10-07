@@ -29,7 +29,7 @@ export default function SolLunaLiveSite() {
       }}>Sol Luna Live</h1>
 
       <p style={{ maxWidth: 700, margin: "0 auto 30px", color: "#cbd5e1" }}>
-        Weekly indie music showcase bridging Mexican and American culture. Submit your song, join the live chat, and celebrate independent artists.
+        Weekly indie music showcase. Submit your song, join the live chat, and celebrate independent artists.
       </p>
 
       {/* --- YouTube Live --- */}
