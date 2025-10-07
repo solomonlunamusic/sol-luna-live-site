@@ -128,7 +128,7 @@ export default function SolLunaLiveSite() {
             style={{ color: "white", background: "#1DB954", padding: "12px 24px", borderRadius: 30, textDecoration: "none" }}>
             🎧 Spotify
           </a>
-          <a href="https://music.youtube.com/@solomonlunamusic"
+          <a href="https://music.youtube.com/channel/UCMGOx3kKBzWWZm4S-K5WKQA?si=U3HYebVEVYMpp9DG"
             target="_blank" rel="noopener noreferrer"
             style={{ color: "white", background: "#FF0000", padding: "12px 24px", borderRadius: 30, textDecoration: "none" }}>
             ▶️ YouTube Music
