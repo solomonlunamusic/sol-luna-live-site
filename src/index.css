@@ -1,6 +1,8 @@
-body {
-  margin: 0;
-  font-family: system-ui, sans-serif;
-  background-color: black;
-  color: white;
+:root {
+  --sun:#FBBF24;
+  --moon:#14B8A6;
+  --fire:#EF4444;
+  --earth:#FB923C;
+  --night:#000000;
+  --text:#F9FAFB;
 }
