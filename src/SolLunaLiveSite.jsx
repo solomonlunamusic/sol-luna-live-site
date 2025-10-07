@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 
 export default function SolLunaLiveSite() {
-  const [artist, setArtist] = useState({ name: "", link: "", email: "" });
-
   return (
     <div
       style={{
@@ -38,10 +36,16 @@ export default function SolLunaLiveSite() {
       {/* --- Personal Introduction --- */}
       <div style={{ maxWidth: 700, margin: "0 auto 30px", color: "#cbd5e1" }}>
         <p style={{ marginBottom: 12 }}>
-          I’m Sol Luna, a Mexican-American indie artist who believes great music doesn’t need a gatekeeper. Sol Luna Live is my weekly showcase where we discover new artists, share honest feedback, and amplify voices that don’t always get a platform.
+          I’m Sol Luna, a Mexican-American indie artist who believes great
+          music doesn’t need a gatekeeper. Sol Luna Live is my weekly showcase
+          where we discover new artists, share honest feedback, and amplify
+          voices that don’t always get a platform.
         </p>
         <p>
-          Bring your song, jump into the live chat, and let’s help each other get heard — with respect, real talk, and a lot of heart. This space is for every dreamer out there making music from bedrooms, garages, and small studios — because we all deserve to shine.
+          Bring your song, jump into the live chat, and let’s help each other
+          get heard — with respect, real talk, and a lot of heart. This space is
+          for every dreamer out there making music from bedrooms, garages, and
+          small studios — because we all deserve to shine.
         </p>
       </div>
 
@@ -102,62 +106,53 @@ export default function SolLunaLiveSite() {
         />
       </div>
 
-      {/* --- Simple Local Inputs (optional) --- */}
-      <div style={{ marginTop: 20 }}>
-        <input
-          type="text"
-          placeholder="Artist or Band Name"
-          value={artist.name}
-          onChange={(e) => setArtist({ ...artist, name: e.target.value })}
+      {/* --- Email Me Section --- */}
+      <section
+        style={{
+          marginTop: 60,
+          padding: "40px 0",
+          background: "rgba(0,0,0,0.6)",
+          borderRadius: 12,
+        }}
+      >
+        <h2
           style={{
-            padding: 10,
-            margin: 6,
-            width: 260,
-            borderRadius: 8,
-            border: "1px solid #333",
-          }}
-        />
-        <input
-          type="text"
-          placeholder="Music Link (YouTube, Spotify, etc.)"
-          value={artist.link}
-          onChange={(e) => setArtist({ ...artist, link: e.target.value })}
-          style={{
-            padding: 10,
-            margin: 6,
-            width: 260,
-            borderRadius: 8,
-            border: "1px solid #333",
-          }}
-        />
-        <input
-          type="email"
-          placeholder="Contact Email"
-          value={artist.email}
-          onChange={(e) => setArtist({ ...artist, email: e.target.value })}
-          style={{
-            padding: 10,
-            margin: 6,
-            width: 260,
-            borderRadius: 8,
-            border: "1px solid #333",
-          }}
-        />
-        <button
-          style={{
-            padding: "10px 20px",
-            margin: 6,
-            background: "linear-gradient(90deg,#FBBF24,#EF4444)",
-            color: "#000",
-            border: "none",
-            borderRadius: 8,
-            cursor: "pointer",
-            fontWeight: "bold",
+            color: "#FBBF24",
+            fontSize: "2rem",
+            marginBottom: 20,
+            fontFamily: "'Righteous','Bebas Neue',sans-serif",
           }}
         >
-          Submit
-        </button>
-      </div>
+          📩 Email Me
+        </h2>
+        <p
+          style={{
+            color: "#cbd5e1",
+            maxWidth: 700,
+            margin: "0 auto 20px",
+            lineHeight: 1.6,
+          }}
+        >
+          Have questions, collaborations, or want to feature your music? Reach
+          out directly — I’d love to connect with other artists, producers, and
+          fans who believe in the power of independent music.
+        </p>
+        <a
+          href="mailto:solomonlunamusic@gmail.com?subject=Sol%20Luna%20Live%20Inquiry"
+          style={{
+            display: "inline-block",
+            padding: "12px 28px",
+            background: "linear-gradient(90deg,#14B8A6,#FBBF24)",
+            color: "#000",
+            borderRadius: 30,
+            fontWeight: "bold",
+            textDecoration: "none",
+            boxShadow: "0 0 10px #00000060",
+          }}
+        >
+          Send Email
+        </a>
+      </section>
 
       {/* --- Connect & Listen Section --- */}
       <section
