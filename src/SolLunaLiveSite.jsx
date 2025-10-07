@@ -157,7 +157,7 @@ export default function SolLunaLiveSite() {
           >
             <iframe
               title="Sol Luna Live Coming Soon"
-              src="https://www.youtube.com/embed/p06E9Hnobuk"
+              src="https://youtu.be/1NqtrIF5IUI"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
