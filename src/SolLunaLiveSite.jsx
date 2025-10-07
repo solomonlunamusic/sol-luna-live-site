@@ -84,7 +84,7 @@ export default function SolLunaLiveSite() {
       🎧 Listen on Spotify
     </a>
 
-    <a href="https://music.youtube.com/channel/@solomonlunamusic" target="_blank" rel="noopener noreferrer"
+    <a href="https://music.youtube.com/@solomonlunamusic" target="_blank" rel="noopener noreferrer"
       style={{ color: "white", background: "#FF0000", padding: "12px 24px", borderRadius: 30, textDecoration: "none" }}>
       ▶️ YouTube Music
     </a>
