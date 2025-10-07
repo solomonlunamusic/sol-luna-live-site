@@ -35,10 +35,15 @@ export default function SolLunaLiveSite() {
         Sol Luna Live
       </h1>
 
-      <p style={{ maxWidth: 700, margin: "0 auto 30px", color: "#cbd5e1" }}>
-        Weekly indie music showcase. Submit your song, join the live chat, and
-        celebrate independent artists.
-      </p>
+      {/* --- Personal Introduction --- */}
+      <div style={{ maxWidth: 700, margin: "0 auto 30px", color: "#cbd5e1" }}>
+        <p style={{ marginBottom: 12 }}>
+          I’m Sol Luna, a Mexican-American indie artist who believes great music doesn’t need a gatekeeper. Sol Luna Live is my weekly showcase where we discover new artists, share honest feedback, and amplify voices that don’t always get a platform.
+        </p>
+        <p>
+          Bring your song, jump into the live chat, and let’s help each other get heard — with respect, real talk, and a lot of heart. This space is for every dreamer out there making music from bedrooms, garages, and small studios — because we all deserve to shine.
+        </p>
+      </div>
 
       {/* --- YouTube Section --- */}
       <h2 style={{ marginTop: 32, color: "#FBBF24" }}>🎬 Coming Soon</h2>
