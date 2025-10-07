@@ -36,7 +36,7 @@ export default function SolLunaLiveSite() {
       <iframe
         width="560"
         height="315"
-        src="https://www.youtube.com/embed/live_stream?channel=YOUR_CHANNEL_ID"
+        src="https://www.youtube.com/embed/live_stream?channel=@solomonlunamusic"
         title="YouTube Live Stream"
         frameBorder="0"
         allowFullScreen
