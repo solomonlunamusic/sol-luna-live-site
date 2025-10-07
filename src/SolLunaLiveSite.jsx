@@ -21,7 +21,6 @@ export default function SolLunaLiveSite() {
 >
   Loading…
 </iframe>
-}
       />
       <br />
       <input
