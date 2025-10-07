@@ -36,8 +36,8 @@ export default function SolLunaLiveSite() {
       <h2 style={{ marginTop: 32, color: "#FBBF24" }}>🎥 Watch Live</h2>
       <div style={{ maxWidth: 900, margin: "0 auto 30px" }}>
         <iframe
-          title="YouTube Live Stream"
-          src="https://www.youtube.com/embed/live_stream?channel=UCMFmXpx_KCRrTPbFY6e43Mw"
+          title="YouTube Live Stream (Coming Soon)"
+          src="https://www.youtube.com/watch?v=p06E9Hnobuk"
           style={{
             width: "100%",
             height: 500,
