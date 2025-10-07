@@ -270,9 +270,9 @@ export default function SolLunaLiveSite() {
       <section id="events" className="wrap" style={{ marginTop: 60 }}>
         <h2 style={{ color: "#FBBF24", fontSize: "2rem", marginBottom: 12 }}>📅 Upcoming Events</h2>
         <ul style={{ listStyle: "none", padding: 0, color: "#cbd5e1", lineHeight: 1.8 }}>
-          <li>🎧 Oct 20 — Indie Night: West Coast Vibes</li>
-          <li>🔥 Nov 03 — Latin Beats Live Showcase</li>
-          <li>🌙 Nov 17 — Moonlight Acoustic Sessions</li>
+          <li>🎧 TBD — Indie Night: West Coast Vibes</li>
+          <li>🔥 TBD — Latin Beats Live Showcase</li>
+          <li>🌙 TBD — Moonlight Acoustic Sessions</li>
         </ul>
       </section>
 
