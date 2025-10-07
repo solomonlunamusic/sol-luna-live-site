@@ -1,6 +1,17 @@
 import React from "react";
 
 export default function SolLunaLiveSite() {
+  // Your gallery images (URL-encoded for spaces)
+  const galleryImages = [
+    { src: "/gallery/CDMV%20album.jpg", alt: "CDMV album artwork" },
+    { src: "/gallery/body.jpg", alt: "Body photo" },
+    { src: "/gallery/face%20pic.jpg", alt: "Face portrait" },
+    { src: "/gallery/sketch.jpg", alt: "Sketch artwork" },
+    { src: "/gallery/solluna%20DJ.jpg", alt: "Sol Luna DJ" },
+    { src: "/gallery/sollunaneon1.jpg", alt: "Sol Luna Neon 1" },
+    { src: "/gallery/vocals1.jpg", alt: "Vocals session" },
+  ];
+
   return (
     <div
       style={{
@@ -14,6 +25,7 @@ export default function SolLunaLiveSite() {
         fontFamily: "'Inter', sans-serif",
       }}
     >
+      {/* Global styles for smooth scroll + hover glow */}
       <style>{`
         html { scroll-behavior: smooth; }
         .nav { position: sticky; top: 0; z-index: 50; }
@@ -43,6 +55,28 @@ export default function SolLunaLiveSite() {
         }
         .nav-link:hover { background: rgba(255,255,255,0.1); color:#fff; }
         .wrap { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        .gallery-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+          gap: 14px;
+        }
+        .gallery-card {
+          border-radius: 12px;
+          overflow: hidden;
+          background: #0b0b0b;
+          box-shadow: 0 0 14px rgba(0,0,0,0.35);
+        }
+        .gallery-img {
+          width: 100%;
+          height: 240px;
+          object-fit: cover;
+          display: block;
+        }
+        .gallery-img:hover {
+          filter: brightness(1.06);
+          transform: scale(1.01);
+          transition: transform .15s ease, filter .15s ease;
+        }
       `}</style>
 
       {/* Sticky Nav */}
@@ -242,13 +276,20 @@ export default function SolLunaLiveSite() {
         </ul>
       </section>
 
-      {/* Gallery */}
+      {/* Gallery (now uses your uploaded images) */}
       <section id="gallery" className="wrap" style={{ marginTop: 60 }}>
         <h2 style={{ color: "#14B8A6", fontSize: "2rem", marginBottom: 16 }}>📸 Behind the Music</h2>
-        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12 }}>
-          <img src="/1758821399837.png" alt="Studio" style={{ width: 250, borderRadius: 12 }} />
-          <img src="/Sol Luna Neon 2.png" alt="Live performance" style={{ width: 250, borderRadius: 12 }} />
-          <img src="/PXL_20250929_014811004.MP~23.JPG" alt="Mixing" style={{ width: 250, borderRadius: 12 }} />
+        <div className="gallery-grid">
+          {galleryImages.map((img, i) => (
+            <a key={i} href={img.src} target="_blank" rel="noopener noreferrer" className="gallery-card" aria-label={img.alt}>
+              <img
+                src={img.src}
+                alt={img.alt}
+                className="gallery-img"
+                loading="lazy"
+              />
+            </a>
+          ))}
         </div>
       </section>
 
@@ -257,10 +298,10 @@ export default function SolLunaLiveSite() {
         <div className="wrap">
           <h2 style={{ color: "#FBBF24", fontSize: "2rem", marginBottom: 20 }}>Connect & Listen</h2>
           <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 20 }}>
-            <a href="https://open.spotify.com/artist/3wxHL4uqpR8q9cKM6uhQUU" className="btn btn-spotify" target="_blank">🎧 Spotify</a>
-            <a href="https://music.youtube.com/channel/UCMGOx3kKBzWWZm4S-K5WKQA" className="btn btn-yt" target="_blank">▶️ YouTube Music</a>
-            <a href="https://soundcloud.com/solomonlunamusic" className="btn btn-sc" target="_blank">☁️ SoundCloud</a>
-            <a href="https://solomonlunamusic.bandcamp.com" className="btn btn-bc" target="_blank">💿 Bandcamp</a>
+            <a href="https://open.spotify.com/artist/3wxHL4uqpR8q9cKM6uhQUU" className="btn btn-spotify" target="_blank" rel="noopener noreferrer">🎧 Spotify</a>
+            <a href="https://music.youtube.com/channel/UCMGOx3kKBzWWZm4S-K5WKQA" className="btn btn-yt" target="_blank" rel="noopener noreferrer">▶️ YouTube Music</a>
+            <a href="https://soundcloud.com/solomonlunamusic" className="btn btn-sc" target="_blank" rel="noopener noreferrer">☁️ SoundCloud</a>
+            <a href="https://solomonlunamusic.bandcamp.com" className="btn btn-bc" target="_blank" rel="noopener noreferrer">💿 Bandcamp</a>
           </div>
         </div>
       </section>
