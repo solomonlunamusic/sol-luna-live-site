@@ -25,7 +25,7 @@ export default function SolLunaLiveSite() {
         fontFamily: "'Inter', sans-serif",
       }}
     >
-      {/* Global styles for smooth scroll + hover glow */}
+      {/* Global styles */}
       <style>{`
         html { scroll-behavior: smooth; }
         .nav { position: sticky; top: 0; z-index: 50; }
@@ -157,10 +157,11 @@ export default function SolLunaLiveSite() {
           >
             <iframe
               title="Sol Luna Live Coming Soon"
-              src="https://www.youtube.com/watch?v=1NqtrIF5IUI"
+              src="https://www.youtube.com/embed/1NqtrIF5IUI?rel=0"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
+              loading="lazy"
               style={{
                 position: "absolute",
                 inset: 0,
@@ -204,24 +205,10 @@ export default function SolLunaLiveSite() {
       {/* Email */}
       <section id="email" style={{ marginTop: 60, padding: "40px 0", background: "rgba(0,0,0,0.6)", borderRadius: 12 }}>
         <div className="wrap">
-          <h2
-            style={{
-              color: "#FBBF24",
-              fontSize: "2rem",
-              marginBottom: 20,
-              fontFamily: "'Righteous','Bebas Neue',sans-serif",
-            }}
-          >
+          <h2 style={{ color: "#FBBF24", fontSize: "2rem", marginBottom: 20, fontFamily: "'Righteous','Bebas Neue',sans-serif" }}>
             📩 Email Me
           </h2>
-          <p
-            style={{
-              color: "#cbd5e1",
-              maxWidth: 700,
-              margin: "0 auto 20px",
-              lineHeight: 1.6,
-            }}
-          >
+          <p style={{ color: "#cbd5e1", maxWidth: 700, margin: "0 auto 20px", lineHeight: 1.6 }}>
             Have questions, collaborations, or want to feature your music? Reach
             out directly — I’d love to connect with other artists, producers, and
             fans who believe in the power of independent music.
@@ -276,18 +263,13 @@ export default function SolLunaLiveSite() {
         </ul>
       </section>
 
-      {/* Gallery (now uses your uploaded images) */}
+      {/* Gallery */}
       <section id="gallery" className="wrap" style={{ marginTop: 60 }}>
         <h2 style={{ color: "#14B8A6", fontSize: "2rem", marginBottom: 16 }}>📸 Behind the Music</h2>
         <div className="gallery-grid">
           {galleryImages.map((img, i) => (
             <a key={i} href={img.src} target="_blank" rel="noopener noreferrer" className="gallery-card" aria-label={img.alt}>
-              <img
-                src={img.src}
-                alt={img.alt}
-                className="gallery-img"
-                loading="lazy"
-              />
+              <img src={img.src} alt={img.alt} className="gallery-img" loading="lazy" />
             </a>
           ))}
         </div>
