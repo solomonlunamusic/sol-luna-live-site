@@ -66,6 +66,56 @@ export default function SolLunaLiveSite() {
         />
         <button style={{ padding: "10px 16px", margin: 6 }}>Submit</button>
       </div>
+      
+      {/* --- Connect & Listen Section --- */}
+<section style={{ marginTop: 80, padding: "40px 0", background: "rgba(0,0,0,0.7)" }}>
+  <h2 style={{ color: "#fbbf24", fontSize: "2rem", marginBottom: 20 }}>Connect & Listen</h2>
+
+  {/* --- Music Links --- */}
+  <div style={{
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    gap: 20,
+    marginBottom: 40
+  }}>
+    <a href="https://open.spotify.com/artist/3wxHL4uqpR8q9cKM6uhQUU?si=OdLsEP88STacuUuh3trTIw" target="_blank" rel="noopener noreferrer"
+      style={{ color: "white", background: "#1DB954", padding: "12px 24px", borderRadius: 30, textDecoration: "none" }}>
+      🎧 Listen on Spotify
+    </a>
+
+    <a href="https://music.youtube.com/channel/@solomonlunamusic" target="_blank" rel="noopener noreferrer"
+      style={{ color: "white", background: "#FF0000", padding: "12px 24px", borderRadius: 30, textDecoration: "none" }}>
+      ▶️ YouTube Music
+    </a>
+
+    <a href="https://soundcloud.com/solomonlunamusic" target="_blank" rel="noopener noreferrer"
+      style={{ color: "white", background: "#ff7700", padding: "12px 24px", borderRadius: 30, textDecoration: "none" }}>
+      ☁️ SoundCloud
+    </a>
+
+    <a href="https://solomonlunamusic.bandcamp.com/" target="_blank" rel="noopener noreferrer"
+      style={{ color: "white", background: "#629aa9", padding: "12px 24px", borderRadius: 30, textDecoration: "none" }}>
+      💿 Bandcamp
+    </a>
+  </div>
+
+  {/* --- Social Media Links --- */}
+  <div style={{
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    gap: 20
+  }}>
+    
+    <a href="https://tiktok.com/@solomonlunamusic" target="_blank" rel="noopener noreferrer"
+      style={{ color: "white", background: "#000000", padding: "10px 20px", borderRadius: 30, textDecoration: "none" }}>
+      🎵 TikTok
+    </a>
+
+     </div>
+</section>
+
     </div>
   );
 }
