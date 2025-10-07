@@ -9,11 +9,19 @@ export default function SolLunaLiveSite() {
       <p>Discover and celebrate independent artists.</p>
 
       <h2>Submit Your Song</h2>
-      <input
-        type="text"
-        placeholder="Artist or Band Name"
-        value={artist.name}
-        onChange={(e) => setArtist({ ...artist, name: e.target.value })}
+      <<h2>Submit Your Song</h2>
+<iframe
+  src="https://docs.google.com/forms/d/e/1FAIpQLSxxxxxxxx/viewform?embedded=true"
+  width="640"
+  height="800"
+  frameBorder="0"
+  marginHeight="0"
+  marginWidth="0"
+  title="Artist Submission Form"
+>
+  Loading…
+</iframe>
+}
       />
       <br />
       <input
