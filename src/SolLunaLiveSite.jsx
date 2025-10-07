@@ -32,23 +32,36 @@ export default function SolLunaLiveSite() {
         Weekly indie music showcase. Submit your song, join the live chat, and celebrate independent artists.
       </p>
 
-      {/* --- YouTube Live --- */}
-      <h2 style={{ marginTop: 32, color: "#FBBF24" }}>🎥 Watch Live</h2>
-      <div style={{ maxWidth: 900, margin: "0 auto 30px" }}>
-        <iframe
-          title="YouTube Live Stream"
-          src="https://www.youtube.com/watch?v=p06E9Hnobuk"
-          style={{
-            width: "100%",
-            height: 500,
-            border: "0",
-            borderRadius: 12,
-            boxShadow: "0 0 20px #00000080"
-          }}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-        />
-      </div>
+      {/* --- YouTube Section --- */}
+<h2 style={{ marginTop: 32, color: "#FBBF24" }}>🎬 Coming Soon</h2>
+<div style={{ maxWidth: 900, margin: "0 auto 30px" }}>
+  <div
+    style={{
+      position: "relative",
+      width: "100%",
+      paddingTop: "56.25%", // 16:9 aspect ratio
+      borderRadius: 12,
+      overflow: "hidden",
+      boxShadow: "0 0 20px #00000080",
+      background: "#000",
+    }}
+  >
+    <iframe
+      title="Sol Luna Live Coming Soon"
+      src="https://www.youtube.com/embed/p06E9Hnobuk"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowFullScreen
+      frameBorder="0"
+      referrerPolicy="strict-origin-when-cross-origin"
+      style={{
+        position: "absolute",
+        inset: 0,
+        width: "100%",
+        height: "100%",
+        border: 0,
+      }}
+    />
+  </div>
 
       {/* --- Google Form --- */}
       <h2 style={{ marginTop: 40, color: "#14B8A6" }}>📝 Submit Your Song</h2>
