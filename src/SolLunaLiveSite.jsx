@@ -10,6 +10,7 @@ export default function SolLunaLiveSite() {
     { src: "/gallery/solluna%20DJ.jpg", alt: "Sol Luna DJ" },
     { src: "/gallery/sollunaneon1.jpg", alt: "Sol Luna Neon 1" },
     { src: "/gallery/vocals1.jpg", alt: "Vocals session" },
+    { src: "/gallery/guitar.jpg", alt: "Guitar session" },
   ];
 
   // ---- Weekly Showcase state + Featured embed ----
