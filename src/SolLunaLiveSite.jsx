@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export default function SolLunaLiveSite() {
+  // Your gallery images (URL-encoded for spaces)
   const galleryImages = [
     { src: "/gallery/CDMV%20album.jpg", alt: "CDMV album artwork" },
     { src: "/gallery/body.jpg", alt: "Body photo" },
@@ -11,16 +12,106 @@ export default function SolLunaLiveSite() {
     { src: "/gallery/vocals1.jpg", alt: "Vocals session" },
   ];
 
+  // ---- Weekly Showcase state + Featured embed ----
+  const [showcasedThisWeek, setShowcasedThisWeek] = useState([]);
+  const [featuredEmbedSrc, setFeaturedEmbedSrc] = useState(
+    "https://open.spotify.com/embed/artist/3wxHL4uqpR8q9cKM6uhQUU?utm_source=generator"
+  );
+
+  useEffect(() => {
+    const url =
+      "https://docs.google.com/spreadsheets/d/e/2PACX-1vS6oOX7BLqVCNYMqMgZkvAWy_pxfejE4swN8S6Pcx1RYpAp-U9zU4jN_QQskLNQ6Oh9Z9Is1Ht_V7Ga/pub?gid=1285974234&single=true&output=csv";
+
+    fetch(url)
+      .then((r) => r.text())
+      .then((text) => {
+        // CSV parse (handles quoted fields and commas inside quotes)
+        const rows = text
+          .trim()
+          .split("\n")
+          .map((line) => {
+            const parts = [];
+            let cur = "";
+            let inQuotes = false;
+            for (let i = 0; i < line.length; i++) {
+              const ch = line[i];
+              if (ch === '"') {
+                if (inQuotes && line[i + 1] === '"') {
+                  cur += '"';
+                  i++;
+                } else {
+                  inQuotes = !inQuotes;
+                }
+              } else if (ch === "," && !inQuotes) {
+                parts.push(cur);
+                cur = "";
+              } else {
+                cur += ch;
+              }
+            }
+            parts.push(cur);
+            return parts.map((s) => s.trim());
+          });
+
+        if (!rows.length) return;
+
+        const header = rows[0].map((h) => h.toLowerCase());
+        const idx = (k) => header.indexOf(k);
+
+        const data = rows.slice(1).map((cols) => ({
+          title: cols[idx("title")] || "",
+          artist: cols[idx("artist")] || "",
+          links: {
+            spotify: cols[idx("spotify")] || "",
+            youtube: cols[idx("youtube")] || "",
+            soundcloud: cols[idx("soundcloud")] || "",
+          },
+        }));
+
+        setShowcasedThisWeek(data);
+
+        // Choose a weekly spotlight that has a Spotify link
+        const now = new Date();
+        const jan1 = new Date(now.getFullYear(), 0, 1);
+        const week = Math.floor(((now - jan1) / 86400000 + jan1.getDay() + 1) / 7);
+
+        const candidates = data.filter(
+          (d) => d.links.spotify && d.links.spotify.includes("open.spotify.com")
+        );
+
+        if (candidates.length) {
+          const pick = candidates[week % candidates.length];
+          let src = pick.links.spotify.trim();
+
+          // Convert common Spotify URL forms to /embed/
+          src = src
+            .replace("open.spotify.com/track/", "open.spotify.com/embed/track/")
+            .replace("open.spotify.com/album/", "open.spotify.com/embed/album/")
+            .replace("open.spotify.com/playlist/", "open.spotify.com/embed/playlist/")
+            .replace("open.spotify.com/artist/", "open.spotify.com/embed/artist/");
+
+          if (!src.includes("/embed/")) {
+            src =
+              "https://open.spotify.com/embed/artist/3wxHL4uqpR8q9cKM6uhQUU?utm_source=generator";
+          }
+          setFeaturedEmbedSrc(src);
+        }
+      })
+      .catch(() => {
+        // leave defaults if fetch fails
+      });
+  }, []);
+
   return (
     <div
-      className="page" // <-- new class so CSS can override on mobile
+      className="page"
       style={{
         textAlign: "center",
         padding: "40px 0 0",
         color: "#f9fafb",
         background:
           "radial-gradient(900px 500px at 25% 15%, #14B8A6 0%, transparent 55%), radial-gradient(900px 500px at 80% 75%, #EF4444 0%, transparent 60%), linear-gradient(180deg, #000000 0%, #111827 100%)",
-        backgroundAttachment: "fixed", // overridden on mobile by CSS below
+        backgroundAttachment: "fixed",
         minHeight: "100vh",
         fontFamily: "'Inter', sans-serif",
       }}
@@ -94,10 +185,19 @@ export default function SolLunaLiveSite() {
           borderBottom: "1px solid rgba(255,255,255,0.08)",
         }}
       >
-        <div className="wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 64 }}>
+        <div
+          className="wrap"
+          style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 64 }}
+        >
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <img src="/logo-sol-luna.png" alt="Sol Luna Logo" style={{ width: 36, height: 36 }} />
-            <span style={{ fontFamily: "'Righteous','Bebas Neue',sans-serif", letterSpacing: 1, color: "#FBBF24" }}>
+            <span
+              style={{
+                fontFamily: "'Righteous','Bebas Neue',sans-serif",
+                letterSpacing: 1,
+                color: "#FBBF24",
+              }}
+            >
               Sol Luna Live
             </span>
           </div>
@@ -109,6 +209,7 @@ export default function SolLunaLiveSite() {
             <a className="nav-link" href="#about">About</a>
             <a className="nav-link" href="#featured">Featured</a>
             <a className="nav-link" href="#events">Events</a>
+            <a className="nav-link" href="#showcase">Showcase</a>
             <a className="nav-link" href="#gallery">Gallery</a>
             <a className="nav-link" href="#listen">Listen</a>
           </div>
@@ -209,12 +310,34 @@ export default function SolLunaLiveSite() {
       </section>
 
       {/* Email */}
-      <section id="email" style={{ marginTop: 60, padding: "40px 0", background: "rgba(0,0,0,0.6)", borderRadius: 12 }}>
+      <section
+        id="email"
+        style={{
+          marginTop: 60,
+          padding: "40px 0",
+          background: "rgba(0,0,0,0.6)",
+          borderRadius: 12,
+        }}
+      >
         <div className="wrap">
-          <h2 style={{ color: "#FBBF24", fontSize: "2rem", marginBottom: 20, fontFamily: "'Righteous','Bebas Neue',sans-serif" }}>
+          <h2
+            style={{
+              color: "#FBBF24",
+              fontSize: "2rem",
+              marginBottom: 20,
+              fontFamily: "'Righteous','Bebas Neue',sans-serif",
+            }}
+          >
             📩 Email Me
           </h2>
-          <p style={{ color: "#cbd5e1", maxWidth: 700, margin: "0 auto 20px", lineHeight: 1.6 }}>
+          <p
+            style={{
+              color: "#cbd5e1",
+              maxWidth: 700,
+              margin: "0 auto 20px",
+              lineHeight: 1.6,
+            }}
+          >
             Have questions, collaborations, or want to feature your music? Reach
             out directly — I’d love to connect with other artists, producers, and
             fans who believe in the power of independent music.
@@ -239,40 +362,29 @@ export default function SolLunaLiveSite() {
         </p>
       </section>
 
-      {/* Featured */}
-<section
-  id="featured"
-  style={{
-    marginTop: 60,
-    padding: "40px 0",
-    background: "rgba(0,0,0,0.5)",
-    borderRadius: 12,
-  }}
->
-  <div className="wrap">
-    <h2 style={{ color: "#14B8A6", fontSize: "2rem", marginBottom: 10 }}>
-      🎤 Featured Artist
-    </h2>
-    <p style={{ color: "#cbd5e1", marginBottom: 16 }}>
-      This week’s spotlight: <strong>Sol Luna</strong> — blending passion,
-      culture, and independence through vibrant sound and storytelling.
-    </p>
-    <iframe
-      title="Sol Luna Spotify Artist"
-      src="https://open.spotify.com/embed/artist/3wxHL4uqpR8q9cKM6uhQUU?utm_source=generator"
-      width="100%"
-      height="400"
-      frameBorder="0"
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-      loading="lazy"
-      style={{
-        borderRadius: 12,
-        maxWidth: 700,
-      }}
-    />
-  </div>
-</section>
-
+      {/* Featured (auto from sheet, fallback to your artist) */}
+      <section
+        id="featured"
+        style={{ marginTop: 60, padding: "40px 0", background: "rgba(0,0,0,0.5)", borderRadius: 12 }}
+      >
+        <div className="wrap">
+          <h2 style={{ color: "#14B8A6", fontSize: "2rem", marginBottom: 10 }}>🎤 Featured Artist</h2>
+          <p style={{ color: "#cbd5e1", marginBottom: 16 }}>
+            This week’s spotlight: <strong>Sol Luna</strong> — blending passion,
+            culture, and independence through vibrant sound and storytelling.
+          </p>
+          <iframe
+            title="Weekly Spotlight"
+            src={featuredEmbedSrc}
+            width="100%"
+            height="400"
+            frameBorder="0"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+            style={{ borderRadius: 12, maxWidth: 700 }}
+          />
+        </div>
+      </section>
 
       {/* Events */}
       <section id="events" className="wrap" style={{ marginTop: 60 }}>
@@ -284,12 +396,97 @@ export default function SolLunaLiveSite() {
         </ul>
       </section>
 
+      {/* Weekly Showcase (from Google Sheets) */}
+      <section id="showcase" className="wrap" style={{ marginTop: 60 }}>
+        <h2 style={{ color: "#14B8A6", fontSize: "2rem", marginBottom: 12 }}>🗓️ This Week’s Showcase</h2>
+        <p style={{ color: "#cbd5e1", marginBottom: 16 }}>
+          The songs featured on this week’s Sol Luna Live:
+        </p>
+
+        {!showcasedThisWeek.length ? (
+          <div
+            style={{
+              background: "rgba(0,0,0,0.4)",
+              border: "1px solid rgba(255,255,255,0.08)",
+              borderRadius: 12,
+              padding: "16px",
+              color: "#94a3b8",
+            }}
+          >
+            No songs listed yet. Add rows to your <em>Showcase</em> sheet and refresh.
+          </div>
+        ) : (
+          <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "grid", gap: 12 }}>
+            {showcasedThisWeek.map((s, i) => (
+              <li
+                key={i}
+                style={{
+                  background: "rgba(0,0,0,0.45)",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  borderRadius: 12,
+                  padding: "14px 16px",
+                  textAlign: "left",
+                }}
+              >
+                <div style={{ fontWeight: 700, color: "#fff" }}>{s.title || "Untitled"}</div>
+                <div style={{ color: "#cbd5e1", marginBottom: 8 }}>
+                  {s.artist || "Unknown Artist"}
+                </div>
+                <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+                  {s.links?.spotify && (
+                    <a
+                      className="btn btn-spotify"
+                      href={s.links.spotify}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Spotify
+                    </a>
+                  )}
+                  {s.links?.youtube && (
+                    <a
+                      className="btn btn-yt"
+                      href={s.links.youtube}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      YouTube
+                    </a>
+                  )}
+                  {s.links?.soundcloud && (
+                    <a
+                      className="btn btn-sc"
+                      href={s.links.soundcloud}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      SoundCloud
+                    </a>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        <p style={{ color: "#94a3b8", marginTop: 12, fontSize: 14 }}>
+          Want to be featured? <a className="nav-link" href="#submit">Submit your song</a>.
+        </p>
+      </section>
+
       {/* Gallery */}
       <section id="gallery" className="wrap" style={{ marginTop: 60 }}>
         <h2 style={{ color: "#14B8A6", fontSize: "2rem", marginBottom: 16 }}>📸 Behind the Music</h2>
         <div className="gallery-grid">
           {galleryImages.map((img, i) => (
-            <a key={i} href={img.src} target="_blank" rel="noopener noreferrer" className="gallery-card" aria-label={img.alt}>
+            <a
+              key={i}
+              href={img.src}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="gallery-card"
+              aria-label={img.alt}
+            >
               <img src={img.src} alt={img.alt} className="gallery-img" loading="lazy" />
             </a>
           ))}
@@ -297,14 +494,45 @@ export default function SolLunaLiveSite() {
       </section>
 
       {/* Listen */}
-      <section id="listen" style={{ marginTop: 80, padding: "40px 0", background: "rgba(0,0,0,0.6)", borderRadius: 12 }}>
+      <section
+        id="listen"
+        style={{ marginTop: 80, padding: "40px 0", background: "rgba(0,0,0,0.6)", borderRadius: 12 }}
+      >
         <div className="wrap">
           <h2 style={{ color: "#FBBF24", fontSize: "2rem", marginBottom: 20 }}>Connect & Listen</h2>
           <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 20 }}>
-            <a href="https://open.spotify.com/artist/3wxHL4uqpR8q9cKM6uhQUU" className="btn btn-spotify" target="_blank" rel="noopener noreferrer">🎧 Spotify</a>
-            <a href="https://music.youtube.com/channel/UCMGOx3kKBzWWZm4S-K5WKQA" className="btn btn-yt" target="_blank" rel="noopener noreferrer">▶️ YouTube Music</a>
-            <a href="https://soundcloud.com/solomonlunamusic" className="btn btn-sc" target="_blank" rel="noopener noreferrer">☁️ SoundCloud</a>
-            <a href="https://solomonlunamusic.bandcamp.com" className="btn btn-bc" target="_blank" rel="noopener noreferrer">💿 Bandcamp</a>
+            <a
+              href="https://open.spotify.com/artist/3wxHL4uqpR8q9cKM6uhQUU"
+              className="btn btn-spotify"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              🎧 Spotify
+            </a>
+            <a
+              href="https://music.youtube.com/channel/UCMGOx3kKBzWWZm4S-K5WKQA"
+              className="btn btn-yt"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              ▶️ YouTube Music
+            </a>
+            <a
+              href="https://soundcloud.com/solomonlunamusic"
+              className="btn btn-sc"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              ☁️ SoundCloud
+            </a>
+            <a
+              href="https://solomonlunamusic.bandcamp.com"
+              className="btn btn-bc"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              💿 Bandcamp
+            </a>
           </div>
         </div>
       </section>
