@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -9,19 +9,34 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;800&family=Righteous&display=swap" rel="stylesheet">
+
+    <!-- Global reset + mobile background fix -->
+    <style>
+      html, body, #root { height: 100%; margin: 0; padding: 0; }
+      body { overflow-x: hidden; background:#000; -webkit-font-smoothing: antialiased; }
+
+      /* If you really want the gradients globally, keep them here. 
+         Otherwise delete this block and let your React inline styles handle it. */
+      /*
+      body {
+        background:
+          radial-gradient(circle at 30% 20%, var(--moon) 0%, transparent 50%),
+          radial-gradient(circle at 80% 70%, var(--fire) 0%, transparent 60%),
+          linear-gradient(180deg, var(--night) 0%, #111827 100%);
+        background-attachment: fixed;
+        color: var(--text);
+      }
+      */
+
+      /* iOS/Safari mobile fix for white edge caused by fixed backgrounds */
+      @media (max-width: 768px) {
+        .page { background-attachment: scroll !important; }
+      }
+    </style>
   </head>
 
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
-  body {
-  background:
-    radial-gradient(circle at 30% 20%, var(--moon) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, var(--fire) 0%, transparent 60%),
-    linear-gradient(180deg, var(--night) 0%, #111827 100%);
-  background-attachment: fixed;
-  color: var(--text);
-}
-
 </html>
