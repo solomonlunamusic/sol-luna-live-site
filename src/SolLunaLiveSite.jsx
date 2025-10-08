@@ -240,24 +240,39 @@ export default function SolLunaLiveSite() {
       </section>
 
       {/* Featured */}
-      <section id="featured" style={{ marginTop: 60, padding: "40px 0", background: "rgba(0,0,0,0.5)", borderRadius: 12 }}>
-        <div className="wrap">
-          <h2 style={{ color: "#14B8A6", fontSize: "2rem", marginBottom: 10 }}>🎤 Featured Artist</h2>
-          <p style={{ color: "#cbd5e1", marginBottom: 16 }}>
-            This week’s spotlight: <strong>Artist Name</strong> — soulful vocals
-            and storytelling. (Update this each week!)
-          </p>
-          <iframe
-            title="Featured Track"
-            src="https://open.spotify.com/embed/track/YOUR_TRACK_ID"
-            width="320"
-            height="86"
-            frameBorder="0"
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            style={{ borderRadius: 12 }}
-          />
-        </div>
-      </section>
+<section
+  id="featured"
+  style={{
+    marginTop: 60,
+    padding: "40px 0",
+    background: "rgba(0,0,0,0.5)",
+    borderRadius: 12,
+  }}
+>
+  <div className="wrap">
+    <h2 style={{ color: "#14B8A6", fontSize: "2rem", marginBottom: 10 }}>
+      🎤 Featured Artist
+    </h2>
+    <p style={{ color: "#cbd5e1", marginBottom: 16 }}>
+      This week’s spotlight: <strong>Sol Luna</strong> — blending passion,
+      culture, and independence through vibrant sound and storytelling.
+    </p>
+    <iframe
+      title="Sol Luna Spotify Artist"
+      src="https://open.spotify.com/embed/artist/3wxHL4uqpR8q9cKM6uhQUU?utm_source=generator"
+      width="100%"
+      height="400"
+      frameBorder="0"
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      loading="lazy"
+      style={{
+        borderRadius: 12,
+        maxWidth: 700,
+      }}
+    />
+  </div>
+</section>
+
 
       {/* Events */}
       <section id="events" className="wrap" style={{ marginTop: 60 }}>
