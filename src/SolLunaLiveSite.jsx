@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function SolLunaLiveSite() {
-  // Your gallery images (URL-encoded for spaces)
   const galleryImages = [
     { src: "/gallery/CDMV%20album.jpg", alt: "CDMV album artwork" },
     { src: "/gallery/body.jpg", alt: "Body photo" },
@@ -14,19 +13,29 @@ export default function SolLunaLiveSite() {
 
   return (
     <div
+      className="page" // <-- new class so CSS can override on mobile
       style={{
         textAlign: "center",
         padding: "40px 0 0",
         color: "#f9fafb",
         background:
           "radial-gradient(900px 500px at 25% 15%, #14B8A6 0%, transparent 55%), radial-gradient(900px 500px at 80% 75%, #EF4444 0%, transparent 60%), linear-gradient(180deg, #000000 0%, #111827 100%)",
-        backgroundAttachment: "fixed",
+        backgroundAttachment: "fixed", // overridden on mobile by CSS below
         minHeight: "100vh",
         fontFamily: "'Inter', sans-serif",
       }}
     >
-      {/* Global styles */}
+      {/* Global + mobile fixes */}
       <style>{`
+        /* Reset default margins and prevent horizontal white edge */
+        html, body, #root { margin: 0; padding: 0; height: 100%; }
+        body { overflow-x: hidden; background:#000; }
+
+        /* iOS/Safari mobile hates fixed backgrounds — disable on small screens */
+        @media (max-width: 768px) {
+          .page { background-attachment: scroll !important; }
+        }
+
         html { scroll-behavior: smooth; }
         .nav { position: sticky; top: 0; z-index: 50; }
         .btn {
@@ -41,10 +50,7 @@ export default function SolLunaLiveSite() {
           transform: translateY(-1px);
           box-shadow: 0 0 16px rgba(20,184,166,0.55), 0 0 24px rgba(251,191,36,0.45);
         }
-        .btn-dark {
-          background: linear-gradient(90deg,#14B8A6,#FBBF24);
-          color:#000;
-        }
+        .btn-dark { background: linear-gradient(90deg,#14B8A6,#FBBF24); color:#000; }
         .btn-spotify { background:#1DB954; color:#fff; }
         .btn-yt { background:#FF0000; color:#fff; }
         .btn-sc { background:#ff7700; color:#fff; }
