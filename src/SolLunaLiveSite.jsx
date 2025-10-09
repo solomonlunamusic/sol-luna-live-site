@@ -500,7 +500,7 @@ export default function SolLunaLiveSite() {
         style={{ marginTop: 80, padding: "40px 0", background: "rgba(0,0,0,0.6)", borderRadius: 12 }}
       >
         <div className="wrap">
-          <h2 style={{ color: "#FBBF24", fontSize: "2rem", marginBottom: 20 }}>Connect & Listen</h2>
+          <h2 style={{ color: "#FBBF24", fontSize: "2rem", marginBottom: 20 }}>Check Out My Music</h2>
           <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 20 }}>
             <a
               href="https://open.spotify.com/artist/3wxHL4uqpR8q9cKM6uhQUU"
