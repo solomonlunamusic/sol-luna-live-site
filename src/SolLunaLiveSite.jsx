@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
 
 export default function SolLunaLiveSite() {
+  // ---- Social links (edit these once) ----
+  const SOCIAL = {
+    instagram: "https://instagram.com/solomonlunamusic",
+    tiktok: "https://tiktok.com/@solomonlunamusic",
+    facebook: "https://facebook.com/solomonlunamusic",
+    youtube: "https://youtube.com/@solomonlunamusic",
+  };
+
   // Your gallery images (URL-encoded for spaces)
   const galleryImages = [
     { src: "/gallery/CDMV%20album.jpg", alt: "CDMV album artwork" },
@@ -26,7 +34,6 @@ export default function SolLunaLiveSite() {
     fetch(url)
       .then((r) => r.text())
       .then((text) => {
-        // CSV parse (handles quoted fields and commas inside quotes)
         const rows = text
           .trim()
           .split("\n")
@@ -98,9 +105,7 @@ export default function SolLunaLiveSite() {
           setFeaturedEmbedSrc(src);
         }
       })
-      .catch(() => {
-        // leave defaults if fetch fails
-      });
+      .catch(() => {});
   }, []);
 
   return (
@@ -119,23 +124,21 @@ export default function SolLunaLiveSite() {
     >
       {/* Global + mobile fixes */}
       <style>{`
-        /* Reset default margins and prevent horizontal white edge */
         html, body, #root { margin: 0; padding: 0; height: 100%; }
         body { overflow-x: hidden; background:#000; }
 
-        /* iOS/Safari mobile hates fixed backgrounds — disable on small screens */
         @media (max-width: 768px) {
           .page { background-attachment: scroll !important; }
         }
 
         html { scroll-behavior: smooth; }
-        .nav { position: sticky; top: 0; z-index: 50; }
+        .nav { position: sticky; top: 0; z-index: 60; }
+
+        .wrap { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
         .btn {
-          display: inline-block;
-          padding: 12px 24px;
-          border-radius: 30px;
-          font-weight: bold;
-          text-decoration: none;
+          display: inline-block; padding: 12px 24px; border-radius: 30px;
+          font-weight: bold; text-decoration: none;
           transition: transform 0.15s ease, box-shadow 0.15s ease;
         }
         .btn:hover {
@@ -147,34 +150,38 @@ export default function SolLunaLiveSite() {
         .btn-yt { background:#FF0000; color:#fff; }
         .btn-sc { background:#ff7700; color:#fff; }
         .btn-bc { background:#629aa9; color:#fff; }
+
         .nav-link {
           color:#e5e7eb; text-decoration:none; padding:10px 14px; border-radius:999px;
           transition: background 0.15s ease, color 0.15s ease;
         }
         .nav-link:hover { background: rgba(255,255,255,0.1); color:#fff; }
-        .wrap { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
         .gallery-grid {
           display: grid;
           grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
           gap: 14px;
         }
         .gallery-card {
-          border-radius: 12px;
-          overflow: hidden;
-          background: #0b0b0b;
+          border-radius: 12px; overflow: hidden; background: #0b0b0b;
           box-shadow: 0 0 14px rgba(0,0,0,0.35);
         }
-        .gallery-img {
-          width: 100%;
-          height: 240px;
-          object-fit: cover;
-          display: block;
+        .gallery-img { width: 100%; height: 240px; object-fit: cover; display: block; }
+        .gallery-img:hover { filter: brightness(1.06); transform: scale(1.01); transition: transform .15s, filter .15s; }
+
+        /* Sticky follow bar below main nav */
+        .followbar {
+          position: sticky;
+          top: 64px; /* height of the main nav */
+          z-index: 55;
+          background: linear-gradient(90deg, rgba(0,0,0,.65), rgba(20,20,25,.65));
+          backdrop-filter: blur(8px);
+          border-bottom: 1px solid rgba(255,255,255,.12);
         }
-        .gallery-img:hover {
-          filter: brightness(1.06);
-          transform: scale(1.01);
-          transition: transform .15s ease, filter .15s ease;
-        }
+        .followbar a { color:#fff; text-decoration:none; }
+        .followbar .wrap { display:flex; gap:10px; justify-content:center; padding:10px 12px; flex-wrap:wrap }
+        .followbar .label { color:#FBBF24; font-weight:700 }
+        .dot { opacity:.7 }
       `}</style>
 
       {/* Sticky Nav */}
@@ -216,6 +223,20 @@ export default function SolLunaLiveSite() {
           </div>
         </div>
       </nav>
+
+      {/* Sticky Follow Bar */}
+      <div className="followbar">
+        <div className="wrap">
+          <span className="label">Follow:</span>
+          <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
+          <span className="dot">·</span>
+          <a href={SOCIAL.tiktok} target="_blank" rel="noopener noreferrer">TikTok</a>
+          <span className="dot">·</span>
+          <a href={SOCIAL.facebook} target="_blank" rel="noopener noreferrer">Facebook</a>
+          <span className="dot">·</span>
+          <a href={SOCIAL.youtube} target="_blank" rel="noopener noreferrer">YouTube</a>
+        </div>
+      </div>
 
       {/* Header */}
       <section id="home" className="wrap" style={{ paddingTop: 32 }}>
@@ -535,6 +556,82 @@ export default function SolLunaLiveSite() {
               💿 Bandcamp
             </a>
           </div>
+        </div>
+      </section>
+
+      {/* === FOLLOW SOL LUNA LIVE (bold section) === */}
+      <section
+        id="follow"
+        style={{
+          marginTop: 60,
+          padding: "28px 18px",
+          borderRadius: 16,
+          background: "linear-gradient(90deg, #0f172a99, #111827aa)",
+          border: "1px solid rgba(255,255,255,.12)",
+          maxWidth: 900,
+          marginLeft: "auto",
+          marginRight: "auto",
+        }}
+      >
+        <h2
+          style={{
+            margin: 0,
+            marginBottom: 12,
+            fontFamily: "'Righteous','Bebas Neue',sans-serif",
+            fontSize: "2rem",
+            background: "linear-gradient(90deg,#FBBF24,#14B8A6)",
+            WebkitBackgroundClip: "text",
+            color: "transparent",
+            textAlign: "center",
+          }}
+        >
+          Follow Sol Luna Live
+        </h2>
+
+        <p style={{ textAlign: "center", color: "#cbd5e1", marginTop: 0, marginBottom: 18 }}>
+          Tap a platform to connect—DMs and collabs welcome.
+        </p>
+
+        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12 }}>
+          <a
+            href={SOCIAL.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn"
+            style={{ background: "#E1306C", color: "#fff" }}
+          >
+            📸 Instagram
+          </a>
+
+          <a
+            href={SOCIAL.tiktok}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn"
+            style={{ background: "#000", color: "#fff" }}
+          >
+            🎵 TikTok
+          </a>
+
+          <a
+            href={SOCIAL.facebook}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn"
+            style={{ background: "#1877F2", color: "#fff" }}
+          >
+            📘 Facebook
+          </a>
+
+          <a
+            href={SOCIAL.youtube}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn"
+            style={{ background: "#FF0000", color: "#fff" }}
+          >
+            ▶️ YouTube
+          </a>
         </div>
       </section>
 
